@@ -1,11 +1,10 @@
 export type Social = {
   label: string
   href: string
-  icon: 'github' | 'linkedin' | 'email'
+  icon: 'github' | 'email'
 }
 
 export const socials: Social[] = [
-  { label: 'GitHub', href: 'https://github.com/seu-usuario', icon: 'github' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/seu-usuario', icon: 'linkedin' },
-  { label: 'Email', href: 'mailto:seu@email.com', icon: 'email' },
+  { label: 'GitHub', href: 'https://github.com/davisilvagames', icon: 'github' },
+  { label: 'Email', href: 'mailto:davi.adrianosilva13@gmail.com', icon: 'email' },
 ]
