@@ -15,7 +15,7 @@ export function Hero() {
           <h1 className="mt-5 font-pixel text-3xl leading-snug text-frost sm:text-4xl md:text-5xl">
             OLÁ, EU SOU
             <br />
-            <span className="text-mint">DAVI</span>
+            <span className="text-mint">DAVI SILVA</span>
             <span className="animate-pulse text-amber">_</span>
           </h1>
 

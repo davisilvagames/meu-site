@@ -9,7 +9,7 @@ export function About() {
         <div className="grid gap-8 md:grid-cols-5">
           <div className="md:col-span-3">
             <p className="text-lg leading-relaxed text-frost">
-              Olá! Sou o <span className="text-mint">Davi</span>, um
+              Olá! Sou o <span className="text-mint">Davi Silva</span>, um
               desenvolvedor de software apaixonado por tecnologia e pelo mundo
               dos games.
             </p>
@@ -34,7 +34,7 @@ export function About() {
               <ul className="mt-4 space-y-3 text-sm">
                 <li>
                   <span className="text-ghost">Nome:</span>{' '}
-                  <span className="text-frost">Davi</span>
+                  <span className="text-frost">Davi Silva</span>
                 </li>
                 <li>
                   <span className="text-ghost">Área:</span>{' '}
