@@ -60,6 +60,12 @@ export function Contact() {
                 davi.adrianosilva13@gmail.com
               </a>
             </p>
+            <p className="mt-3 text-sm text-ghost">
+              <span className="text-frost">Telefone:</span>{' '}
+              <a href="tel:+5591981942231" className="hover:text-mint">
+                (91) 98194-2231
+              </a>
+            </p>
           </div>
 
           <div className="md:col-span-3">
