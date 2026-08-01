@@ -10,7 +10,6 @@ import { Footer } from './components/Footer'
 function App() {
   return (
     <>
-      <div className="scanlines pointer-events-none fixed inset-0 z-[100]" aria-hidden="true" />
       <Navbar />
       <main>
         <Hero />
