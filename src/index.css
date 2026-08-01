@@ -1,0 +1,86 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-mono: 'Space Mono', monospace;
+
+  --color-night: #0c0b16;
+  --color-panel: #141225;
+  --color-panel-2: #1e1a33;
+  --color-line: #322c52;
+  --color-ghost: #9b97b0;
+  --color-frost: #e9e6f5;
+  --color-cyber: #4de3ff;
+  --color-mint: #00ff9f;
+  --color-amber: #ffcf4d;
+  --color-blast: #ff5d8f;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: var(--color-frost);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-mint);
+    color: var(--color-night);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-cyber);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .pixel-card {
+    border: 2px solid var(--color-line);
+    background-color: var(--color-panel);
+    box-shadow: 4px 4px 0 0 rgb(0 0 0 / 0.55);
+    image-rendering: pixelated;
+  }
+
+  .pixel-button {
+    border: 2px solid var(--color-night);
+    box-shadow:
+      0 4px 0 0 var(--color-night),
+      4px 4px 0 0 rgb(0 0 0 / 0.55);
+    transition:
+      transform 80ms ease,
+      box-shadow 80ms ease,
+      filter 80ms ease;
+  }
+
+  .pixel-button:hover {
+    filter: brightness(1.08);
+  }
+
+  .pixel-button:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+      0 0 0 0 var(--color-night),
+      2px 2px 0 0 rgb(0 0 0 / 0.55);
+  }
+}
+
+@utility pixel-img {
+  image-rendering: pixelated;
+}
+
+/* Efeito scanline sutil por cima da página */
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgb(0 0 0 / 0.12) 2px,
+    rgb(0 0 0 / 0.12) 4px
+  );
+}
