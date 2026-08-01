@@ -1,27 +1,24 @@
 import { useState, type FormEvent } from 'react'
-import emailjs from '@emailjs/browser'
 import { SectionHeading } from './SectionHeading'
 import { SocialIcon } from './SocialIcon'
 import { socials } from '../data/social'
 
-const SERVICE_ID = 'seu_service_id'
-const TEMPLATE_ID = 'seu_template_id'
-const PUBLIC_KEY = 'sua_public_key'
+const EMAIL = 'davi.adrianosilva13@gmail.com'
 
 export function Contact() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [sent, setSent] = useState(false)
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setStatus('sending')
-
-    try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.currentTarget, PUBLIC_KEY)
-      setStatus('sent')
-      event.currentTarget.reset()
-    } catch {
-      setStatus('error')
-    }
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const name = String(data.get('user_name') ?? '')
+    const email = String(data.get('user_email') ?? '')
+    const message = String(data.get('message') ?? '')
+    const subject = encodeURIComponent(`Contato pelo site — ${name}`)
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
+    setSent(true)
   }
 
   return (
@@ -42,7 +39,7 @@ export function Contact() {
                   <a
                     href={social.href}
                     target={social.icon === 'email' ? undefined : '_blank'}
-                    rel="noreferrer"
+                    rel={social.icon === 'email' ? undefined : 'noreferrer'}
                     className="inline-flex items-center gap-3 text-sm text-frost hover:text-mint"
                   >
                     <span className="pixel-button bg-panel-2 p-2 text-frost">
@@ -107,19 +104,14 @@ export function Contact() {
               </label>
               <button
                 type="submit"
-                disabled={status === 'sending'}
-                className="pixel-button w-full bg-mint px-5 py-3 font-pixel text-xs text-night sm:w-auto disabled:opacity-60"
+                className="pixel-button w-full bg-mint px-5 py-3 font-pixel text-xs text-night sm:w-auto"
               >
-                {status === 'sending' ? 'ENVIANDO...' : 'ENVIAR MENSAGEM'}
+                ENVIAR MENSAGEM
               </button>
-              {status === 'sent' && (
+              {sent && (
                 <p className="text-sm text-mint">
-                  Mensagem enviada com sucesso!
-                </p>
-              )}
-              {status === 'error' && (
-                <p className="text-sm text-blast">
-                  Erro ao enviar. Tente novamente ou me escreva pelo email.
+                  Abrindo seu app de email... Se não abrir, me escreva pelo email
+                  ou telefone ao lado.
                 </p>
               )}
             </form>

@@ -46,7 +46,7 @@ export function Hero() {
                 <a
                   href={social.href}
                   target={social.icon === 'email' ? undefined : '_blank'}
-                  rel="noreferrer"
+                  rel={social.icon === 'email' ? undefined : 'noreferrer'}
                   aria-label={social.label}
                   className="pixel-button block bg-panel-2 p-3 text-frost hover:text-mint"
                 >
