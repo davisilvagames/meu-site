@@ -30,4 +30,22 @@ export const projects: Project[] = [
     initial: 'S',
     link: '#contato',
   },
+  {
+    title: 'Facebook Bot',
+    description:
+      'Bot em Python que faz postagens automáticas no Facebook, automatizando tarefas repetitivas e facilitando o gerenciamento de conteúdo.',
+    tags: ['Python', 'Automação', 'API'],
+    color: 'blast',
+    initial: 'B',
+    link: '#contato',
+  },
+  {
+    title: 'DAVIXIA',
+    description:
+      'Inteligência artificial simples desenvolvida em Python, capaz de processar comandos e interagir com o usuário de forma inteligente.',
+    tags: ['Python', 'IA', 'NLP'],
+    color: 'amber',
+    initial: 'D',
+    link: '#contato',
+  },
 ]
