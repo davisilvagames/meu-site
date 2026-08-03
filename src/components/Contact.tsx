@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
 import { SectionHeading } from './SectionHeading'
 import { SocialIcon } from './SocialIcon'
@@ -11,15 +11,21 @@ const PUBLIC_KEY = '2wTOX_fxZj2DtnuEP'
 export function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
+  useEffect(() => {
+    emailjs.init(PUBLIC_KEY)
+  }, [])
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('sending')
 
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.currentTarget, PUBLIC_KEY)
+      const result = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.currentTarget)
+      console.log('EmailJS success:', result)
       setStatus('sent')
       event.currentTarget.reset()
-    } catch {
+    } catch (error) {
+      console.error('EmailJS error:', error)
       setStatus('error')
     }
   }
