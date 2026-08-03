@@ -18,12 +18,12 @@ export function Contact() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('sending')
+    const form = event.currentTarget
 
     try {
-      const result = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.currentTarget)
-      console.log('EmailJS success:', result)
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
       setStatus('sent')
-      event.currentTarget.reset()
+      form.reset()
     } catch (error) {
       console.error('EmailJS error:', error)
       setStatus('error')
