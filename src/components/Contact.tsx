@@ -1,24 +1,27 @@
 import { useState, type FormEvent } from 'react'
+import emailjs from '@emailjs/browser'
 import { SectionHeading } from './SectionHeading'
 import { SocialIcon } from './SocialIcon'
 import { socials } from '../data/social'
 
-const EMAIL = 'davi.adrianosilva13@gmail.com'
+const SERVICE_ID = 'service_f5vbife'
+const TEMPLATE_ID = 'template_rfug0od'
+const PUBLIC_KEY = '2wTOX_fxZj2DtnuEP'
 
 export function Contact() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = event.currentTarget
-    const data = new FormData(form)
-    const name = String(data.get('user_name') ?? '')
-    const email = String(data.get('user_email') ?? '')
-    const message = String(data.get('message') ?? '')
-    const subject = encodeURIComponent(`Contato pelo site — ${name}`)
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
-    setSent(true)
+    setStatus('sending')
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, event.currentTarget, PUBLIC_KEY)
+      setStatus('sent')
+      event.currentTarget.reset()
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -104,14 +107,19 @@ export function Contact() {
               </label>
               <button
                 type="submit"
-                className="pixel-button w-full bg-mint px-5 py-3 font-pixel text-xs text-night sm:w-auto"
+                disabled={status === 'sending'}
+                className="pixel-button w-full bg-mint px-5 py-3 font-pixel text-xs text-night sm:w-auto disabled:opacity-60"
               >
-                ENVIAR MENSAGEM
+                {status === 'sending' ? 'ENVIANDO...' : 'ENVIAR MENSAGEM'}
               </button>
-              {sent && (
+              {status === 'sent' && (
                 <p className="text-sm text-mint">
-                  Abrindo seu app de email... Se não abrir, me escreva pelo email
-                  ou telefone ao lado.
+                  Mensagem enviada com sucesso!
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-blast">
+                  Erro ao enviar. Tente novamente ou me escreva pelo email.
                 </p>
               )}
             </form>
