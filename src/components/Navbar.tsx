@@ -14,7 +14,7 @@ export function Navbar() {
           href="#inicio"
           className="font-pixel text-sm text-mint hover:text-cyber"
         >
-          DAVI SILVA
+          DAVI TECH
         </a>
 
         <ul className="hidden items-center gap-6 lg:flex">
